@@ -4,7 +4,7 @@
 
 Just a mobile application made with `flutter`, `dart`, and `firebase` to theoretically help people to easily rent vehicles.
 
-#### Made by
+## Made by
 ##### AHISSOU Marth-Massit
 ##### AVALLA Onésime
 ##### QUENUM Daryl
