@@ -8,6 +8,7 @@ class Assets {
   static const String homeMotorcycle = 'assets/images/home/motorcycle.png';
   static const String homeTruck = 'assets/images/home/truck.png';
   static const String homeVhirelogo = 'assets/images/home/vhirelogo.png';
+  static const String iconsGithub = 'assets/images/icons/github.png';
   static const String imagesBackground = 'assets/images/background.png';
   static const String imagesDefault = 'assets/images/default.png';
   static const String imagesDutro = 'assets/images/dutro.png';
@@ -17,6 +18,7 @@ class Assets {
   static const String imagesSuzuki = 'assets/images/suzuki.png';
   static const String imagesVhire = 'assets/images/vhire.png';
   static const String imagesVhirelogo = 'assets/images/vhirelogo.png';
+  static const String imagesVhiremainlogo = 'assets/images/vhiremainlogo.png';
   static const String imagesVolvo = 'assets/images/volvo.png';
 
 }

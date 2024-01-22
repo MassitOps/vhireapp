@@ -9,10 +9,11 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final AuthenticatedUser? user = Provider.of<AuthenticatedUser?>(context);
 
     // return either signIn or home page
-    if (user == null) {
+    if(user == null) {
       return const LoginPage();
     } else {
       return GetUpdateUserBeforeHome(user: user);
