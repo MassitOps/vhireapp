@@ -18,4 +18,14 @@ class Agency {
   });
 
 
+  static Future getLocationFromID(String agencyID) async {
+    GeoPoint location = const GeoPoint(0, 0);
+    DocumentSnapshot documentSnapshot = await agencyCollection.doc(agencyID).get();
+    if(documentSnapshot.exists) {
+      dynamic data = documentSnapshot.data();
+      location = (data==null) ? const GeoPoint(0, 0) : data["localisation"];
+    }
+    return location;
+  }
+
 }

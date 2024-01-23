@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vhireapp/models/comment.dart';
 import 'package:vhireapp/shared/loading.dart';
+
+
 class CommentsPage extends StatefulWidget {
 
   final String vehicle_id;
@@ -32,14 +34,14 @@ class _CommentsPageState extends State<CommentsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: (!_isLoading) ? SafeArea(
+      body: (!_isLoading) ? comments.isNotEmpty ? SafeArea(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
               Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Column(
                     children: comments.map((Comment comment) {
                       return (comment.deleted_at == null) ? Column(
@@ -47,10 +49,10 @@ class _CommentsPageState extends State<CommentsPage> {
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Color(0x55419CE1),
+                              color: const Color(0x55419CE1),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
                               child: Column(
                                 children: [
                                   Row(
@@ -60,14 +62,14 @@ class _CommentsPageState extends State<CommentsPage> {
                                         radius: 25,
                                         backgroundColor: Color(0xFF57DC90),
                                       ),
-                                      SizedBox(width: 5,),
+                                      const SizedBox(width: 5,),
                                       Expanded(
                                         child: Container(
                                           alignment: Alignment.centerLeft,
                                           padding: const EdgeInsets.only(top: 14),
                                           child: Text(
                                             comment.username,
-                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                                             textAlign: TextAlign.center,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -76,23 +78,23 @@ class _CommentsPageState extends State<CommentsPage> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(height: 4,),
+                                  const SizedBox(height: 4,),
                                   Text(
                                     comment.content!,
-                                    style: TextStyle(fontSize: 15),
+                                    style: const TextStyle(fontSize: 15),
                                   ),
-                                  SizedBox(height: 4,),
+                                  const SizedBox(height: 4,),
                                   Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Text(DateFormat("dd/MM/yy").format(comment.created_at.toDate()), style: TextStyle(color: Colors.black45, fontSize: 12),),
+                                        Text(DateFormat("dd/MM/yy HH:mm").format(comment.created_at.toDate()), style: TextStyle(color: Colors.black45, fontSize: 12),),
                                       ]
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                          SizedBox(height: 10,), // Add space between each comment widget
+                          const SizedBox(height: 10,), // Add space between each comment widget
                         ],
                       ) : const SizedBox();
                     }).toList(),
@@ -102,7 +104,7 @@ class _CommentsPageState extends State<CommentsPage> {
             ],
           ),
         ),
-      ) : const Loading(),
+      ) : const Center(child: Text("Aucun Commentaire\n\n\n\n", style: TextStyle(fontSize: 20))) : const Loading(),
     );
   }
 }

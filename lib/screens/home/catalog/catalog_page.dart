@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vhireapp/models/user.dart';
 import 'package:vhireapp/models/vehicle.dart';
 import 'package:vhireapp/screens/home/catalog/product_box.dart';
+import 'package:vhireapp/screens/home/home/profile_page.dart';
 import 'package:vhireapp/screens/home/home/about_page.dart';
 import 'package:vhireapp/screens/home/home/await_get_user.dart';
 import 'package:vhireapp/screens/home/home/home_page.dart';
@@ -112,52 +113,55 @@ class _CatalogState extends State<Catalog> {
             children: [
               DrawerHeader(
                   decoration: const BoxDecoration(color: Color(0xFF5371E9)),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: Container(
-                          width: 55,
-                          height: 55,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF5371E9),
-                            border: Border.all(style: BorderStyle.solid, width: 2.5, color: Colors.white),
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Center(
-                              child: const Icon(Icons.person, size: 40, color: Colors.white)
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => ProfilePage(user: widget.user))),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          child: Container(
+                            width: 55,
+                            height: 55,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF5371E9),
+                              border: Border.all(style: BorderStyle.solid, width: 2.5, color: Colors.white),
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            child: Center(
+                                child: const Icon(Icons.person, size: 40, color: Colors.white)
+                            ),
                           ),
                         ),
-                      ),
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 45, 0, 0),
-                            child: SizedBox(
-                              width: 125,
-                              child: Text(
-                                "$_displayedLastName $_displayedFirstname",
-                                style: const TextStyle(color: Colors.white, fontSize: 20),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 45, 0, 0),
+                              child: SizedBox(
+                                width: 125,
+                                child: Text(
+                                  "$_displayedLastName $_displayedFirstname",
+                                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                            child: SizedBox(
-                              width: 125,
-                              child: Text(
-                                _displayedEmail,
-                                style: const TextStyle(color: Colors.white, fontSize: 14),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                              child: SizedBox(
+                                width: 125,
+                                child: Text(
+                                  _displayedEmail,
+                                  style: const TextStyle(color: Colors.white, fontSize: 14),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
                               ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   )
               ),
               Expanded(

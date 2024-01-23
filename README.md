@@ -1,9 +1,14 @@
 ## Vhire app
 
-If you know what you have to do, go ahead if not wait a moment i will provide a documentation to help everybody setup the project
+![Vhireapp's main logo](assets/images/vhiremainlogo.png)
 
-### Have a good time you little shit 
+Just a mobile application made with `flutter`, `dart`, and `firebase` to theoretically help people to easily rent vehicles.
 
-## Don't forget to send your firebase account mail in the group so i can add you on the project 
-
-## A message from the things branch 
+## Made by
+##### AHISSOU Marth-Massit
+##### AVALLA Onésime
+##### QUENUM Daryl
+##### WEDJANGNON O'Neil
+##### ZIME YERIMA Akiil
+##### ADJOVI Ruben
+##### TOHON Aristot
