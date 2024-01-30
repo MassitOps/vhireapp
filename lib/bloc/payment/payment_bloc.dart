@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:vhireapp/shared/global.dart';
 
 part 'payment_event.dart';
 part 'payment_state.dart';
@@ -51,6 +52,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     if (paymentIntentResult['clientSecret'] != null &&
         paymentIntentResult['requiresAction'] == null) {
       // The payment succedeed / went through.
+      GlobalVar.myVar = await Stripe.instance.handleNextAction(paymentIntentResult["clientSecret"]);
       emit(state.copyWith(status: PaymentStatus.success));
     }
 

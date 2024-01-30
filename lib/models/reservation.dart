@@ -11,7 +11,7 @@ class Reservation {
   late Timestamp finish_at;
   late String status;
   late int montant;
-  late int? transaction_id;
+  late String? transaction_id;
   final int vehicle_price;
 
   // Constructor
@@ -39,6 +39,18 @@ class Reservation {
     } else {
       status = "finished";
     }
+  }
+
+  // store a reservation
+  Future store() async {
+    Map<String, dynamic> data = {};
+    data["user_id"] = user_id;
+    data["vehicle_id"] = vehicle_id;
+    data["begin_at"] = begin_at;
+    data["finish_at"] = finish_at;
+    data["transaction_id"] = transaction_id;
+    data["vehicle_price"] = vehicle_price;
+    await reservationCollection.add(data);
   }
 
 }

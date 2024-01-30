@@ -20,5 +20,8 @@ class Assets {
   static const String imagesVhirelogo = 'assets/images/vhirelogo.png';
   static const String imagesVhiremainlogo = 'assets/images/vhiremainlogo.png';
   static const String imagesVolvo = 'assets/images/volvo.png';
+  static const String paymentsPayementCard = 'assets/images/payments/payement_card.png';
+  static const String paymentsPayementCash = 'assets/images/payments/payement_cash.png';
+  static const String paymentsSuccess = 'assets/images/payments/success.png';
 
 }

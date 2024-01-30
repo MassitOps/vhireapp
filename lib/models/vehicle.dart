@@ -80,4 +80,8 @@ class Vehicle {
     return vehiclesList;
   }
 
+  static Future toHireOrFreeVehicle(String id, String status) async {
+    vehicleCollection.doc(id).update({"status": status});
+  }
+
 }

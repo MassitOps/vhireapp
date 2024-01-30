@@ -6,6 +6,7 @@ import 'package:vhireapp/screens/home/catalog/product_box.dart';
 import 'package:vhireapp/models/vehicle.dart';
 import 'package:vhireapp/screens/home/details/comments.dart';
 import 'package:vhireapp/screens/home/details/geolocation.dart';
+import 'package:vhireapp/screens/home/details/payment_page.dart';
 import 'package:vhireapp/screens/home/details/reservation_page.dart';
 import 'package:vhireapp/screens/home/home/profile_page.dart';
 import 'package:vhireapp/screens/home/home/about_page.dart';
@@ -280,7 +281,7 @@ class _ConfirmReservationState extends State<ConfirmReservation> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => PaymentPage0(reservation: widget.reservation, user: widget.user,))),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
