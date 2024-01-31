@@ -41,6 +41,17 @@ class Comment {
     return comment;
   }
 
+  Map<String, dynamic> toDocument() {
+    return {
+      'user_id': user_id,
+      'vehicle_id': vehicle_id,
+      'content': content,
+      'created_at': created_at,
+      'deleted_at': deleted_at,
+      'note': note,
+      'username': username,
+    };
+  }
 
   // get
   static Future getCommentByVehicleID(String vehicleID) async {

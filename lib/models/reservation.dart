@@ -52,5 +52,19 @@ class Reservation {
     data["vehicle_price"] = vehicle_price;
     await reservationCollection.add(data);
   }
-
+  factory Reservation.fromDocument(DocumentSnapshot doc) {
+    return Reservation(
+      id: doc.id,
+      user_id: doc['user_id'],
+      vehicle_id: doc['vehicle_id'],
+      begin_at: doc['begin_at'],
+      finish_at: doc['finish_at'],
+      transaction_id: doc['transaction_id'],
+      vehicle_price: doc['vehicle_price'],
+    );
+  }
+  static Future<List<Reservation>> getUserReservationHistory(String userId) async {
+    QuerySnapshot querySnapshot = await reservationCollection.where('user_id', isEqualTo: userId).get();
+    return querySnapshot.docs.map((doc) => Reservation.fromDocument(doc)).toList();
+  }
 }
