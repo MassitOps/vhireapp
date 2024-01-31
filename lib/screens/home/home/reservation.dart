@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vhireapp/models/reservation.dart';
 import 'package:vhireapp/models/user.dart';
+import 'package:vhireapp/screens/home/home/reservation_box.dart';
+import 'package:vhireapp/shared/loading.dart';
+import 'dart:async';
 
 class ReservationHistory extends StatefulWidget {
   final AuthenticatedUser user;
@@ -19,7 +22,10 @@ class _ReservationHistoryState extends State<ReservationHistory> {
     setState(() => _isLoading = true );
     reservations = await Reservation.getUserReservationHistory(widget.user.id);
     reservations.sort((Reservation a, Reservation b) => b.begin_at.compareTo(a.begin_at));
-    setState(() => _isLoading = false );
+    reservations.sort((Reservation a, Reservation b) => b.finish_at.compareTo(a.finish_at));
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() => _isLoading = false );
+    });
   }
 
   @override
@@ -32,19 +38,14 @@ class _ReservationHistoryState extends State<ReservationHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: _isLoading
-              ? CircularProgressIndicator()
-              : SingleChildScrollView(
-            child: Column(
-              children: reservations.map((reservation) => ListTile(
-                title: Text('Vehicle ID: ${reservation.vehicle_id}'),
-                subtitle: Text('Status: ${reservation.status}'),
-              )).toList(),
+        child: _isLoading
+            ? const Loading()
+            : SingleChildScrollView(
+              child: Column(
+                children: reservations.map((reservation) => ReservationBox(reservation: reservation,)).toList(),
+              ),
             ),
           ),
-        ),
-      ),
     );
   }
 }
