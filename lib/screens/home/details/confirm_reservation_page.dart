@@ -13,6 +13,7 @@ import 'package:vhireapp/screens/home/home/about_page.dart';
 import 'package:vhireapp/screens/wrapper.dart';
 import 'package:vhireapp/services/authentication.dart';
 import 'package:vhireapp/shared/error.dart';
+import 'package:vhireapp/screens/home/home/reservation.dart';
 
 
 class ConfirmReservation extends StatefulWidget {
@@ -56,6 +57,12 @@ class _ConfirmReservationState extends State<ConfirmReservation> {
     }
   }
 
+  void _onButtonPressed() {
+    setState(() {
+      _currentIndex = 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +80,7 @@ class _ConfirmReservationState extends State<ConfirmReservation> {
         ],
       ),
 
-      body: (_currentIndex==0) ? WillPopScope(
+      body: (_currentBodyIndex == 0) ? (_currentIndex==0) ? WillPopScope(
         onWillPop: () async {
           setState(() => _currentIndex = 1);
           return false;
@@ -328,11 +335,17 @@ class _ConfirmReservationState extends State<ConfirmReservation> {
               ],
             ),
             Expanded(
-                child: CommentsPage(vehicle_id: widget.vehicle.id)
+                child: CommentsPage(vehicle_id: widget.vehicle.id, user: widget.user, onButtonPressed: _onButtonPressed)
             ),
           ],
         ),
-      ) : const SizedBox(),
+      ) : const SizedBox() : WillPopScope(
+          onWillPop: () async {
+            setState(() => _currentBodyIndex = 0);
+            return false;
+          },
+          child: ReservationHistory(user: widget.user)
+      ),
 
       drawer: Drawer(width: MediaQuery.of(context).size.width * 0.65,
           child: Column(
@@ -400,7 +413,7 @@ class _ConfirmReservationState extends State<ConfirmReservation> {
                     children: [
                       menuItem(0, "Accueil", Icons.home, (_currentBodyIndex == 0) ? true : false),
                       menuItem(1, "Réservations", Icons.layers, (_currentBodyIndex == 1) ? true : false),
-                      menuItem(2, "Service client", Icons.support_agent, (_currentBodyIndex == 2) ? true : false),
+                      //menuItem(2, "Service client", Icons.support_agent, (_currentBodyIndex == 2) ? true : false),
                       menuItem(3, "Déconnexion", Icons.exit_to_app, (_currentBodyIndex == 3) ? true : false),
                     ],
                   ),

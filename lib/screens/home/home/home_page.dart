@@ -7,6 +7,7 @@ import 'package:vhireapp/screens/home/home/about_page.dart';
 import 'package:vhireapp/screens/wrapper.dart';
 import 'package:vhireapp/services/authentication.dart';
 import 'package:vhireapp/shared/error.dart';
+import 'package:vhireapp/screens/home/home/reservation.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -114,7 +115,7 @@ class _HomePageState extends State<HomePage> {
       ),
 
 
-      body: SingleChildScrollView(
+      body: (_currentBodyIndex == 0) ? SingleChildScrollView(
         child: Container(
           color: Colors.white,
           child: Align(
@@ -156,6 +157,12 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+      ) : WillPopScope(
+        onWillPop: () async {
+          setState(() => _currentBodyIndex = 0);
+          return false;
+        },
+        child: ReservationHistory(user: widget.user)
       ),
 
 
@@ -225,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     menuItem(0, "Accueil", Icons.home, (_currentBodyIndex == 0) ? true : false),
                     menuItem(1, "Réservations", Icons.layers, (_currentBodyIndex == 1) ? true : false),
-                    menuItem(2, "Service client", Icons.support_agent, (_currentBodyIndex == 2) ? true : false),
+                    //menuItem(2, "Service client", Icons.support_agent, (_currentBodyIndex == 2) ? true : false),
                     menuItem(3, "Déconnexion", Icons.exit_to_app, (_currentBodyIndex == 3) ? true : false),
                   ],
                 ),

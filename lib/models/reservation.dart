@@ -13,6 +13,7 @@ class Reservation {
   late int montant;
   late String? transaction_id;
   final int vehicle_price;
+  late String? vehicle_name;
 
   // Constructor
   Reservation({
@@ -24,6 +25,7 @@ class Reservation {
     this.transaction_id,
     required this.vehicle_price
   }) {
+    getVehicleName();
     montant = finish_at.toDate().difference(begin_at.toDate()).inDays * vehicle_price;
     setStatus();
   }
@@ -52,6 +54,7 @@ class Reservation {
     data["vehicle_price"] = vehicle_price;
     await reservationCollection.add(data);
   }
+
   factory Reservation.fromDocument(DocumentSnapshot doc) {
     return Reservation(
       id: doc.id,
@@ -59,12 +62,32 @@ class Reservation {
       vehicle_id: doc['vehicle_id'],
       begin_at: doc['begin_at'],
       finish_at: doc['finish_at'],
-      transaction_id: doc['transaction_id'],
+      transaction_id: ((doc['transaction_id'] == null) || (doc['transaction_id'] == "")) ? "" : doc['transaction_id'],
       vehicle_price: doc['vehicle_price'],
     );
   }
+
   static Future<List<Reservation>> getUserReservationHistory(String userId) async {
     QuerySnapshot querySnapshot = await reservationCollection.where('user_id', isEqualTo: userId).get();
     return querySnapshot.docs.map((doc) => Reservation.fromDocument(doc)).toList();
+  }
+
+  Future getVehicleName() async {
+    try {
+      Map<String, dynamic>? data = (await FirebaseFirestore.instance.collection("vehicles").doc(vehicle_id).get()).data();
+      vehicle_name = data?["brand"] + " " + data?["model"];
+    } on FirebaseException catch(e) {
+      //return CustomError(e.code, e.message!);
+      null;
+    }
+  }
+
+  static Future<bool> haveOnceAtLeastHiredThisVehicle(String vehicleID, String userID) async {
+    QuerySnapshot querySnapshot = await reservationCollection
+        .where('vehicle_id', isEqualTo: vehicleID)
+        .where('user_id', isEqualTo: userID)
+        .limit(1)
+        .get();
+    return querySnapshot.docs.isNotEmpty;
   }
 }

@@ -9,6 +9,7 @@ import 'package:vhireapp/screens/home/home/home_page.dart';
 import 'package:vhireapp/screens/wrapper.dart';
 import 'package:vhireapp/services/authentication.dart';
 import 'package:vhireapp/shared/error.dart';
+import 'package:vhireapp/screens/home/home/reservation.dart';
 
 
 class Catalog extends StatefulWidget {
@@ -174,7 +175,7 @@ class _CatalogState extends State<Catalog> {
                     children: [
                       menuItem(0, "Accueil", Icons.home, (_currentBodyIndex == 0) ? true : false),
                       menuItem(1, "Réservations", Icons.layers, (_currentBodyIndex == 1) ? true : false),
-                      menuItem(2, "Service client", Icons.support_agent, (_currentBodyIndex == 2) ? true : false),
+                      //menuItem(2, "Service client", Icons.support_agent, (_currentBodyIndex == 2) ? true : false),
                       menuItem(3, "Déconnexion", Icons.exit_to_app, (_currentBodyIndex == 3) ? true : false),
                     ],
                   ),
@@ -198,7 +199,7 @@ class _CatalogState extends State<Catalog> {
           )
       ),
 
-      body: WillPopScope(
+      body: (_currentBodyIndex == 0) ? WillPopScope(
         onWillPop: () async {
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => HomePage(user: widget.user, map: GetUpdateUserBeforeHome.map)));
           return false;
@@ -373,6 +374,12 @@ class _CatalogState extends State<Catalog> {
             ),
           ),
         ),
+      ) : WillPopScope(
+        onWillPop: () async {
+          setState(() => _currentBodyIndex = 0);
+          return false;
+        },
+        child: ReservationHistory(user: widget.user)
       )
     );
   }
